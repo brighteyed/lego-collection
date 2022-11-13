@@ -1,0 +1,10 @@
+version: '2'
+services:
+  bricks:
+    build: .
+    image: bricks
+    container_name: bricks
+    volumes:
+      - "${DOCKER_DATA}/bricks:/database"
+    env_file:
+      - sample.env

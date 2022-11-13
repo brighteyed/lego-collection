@@ -1,4 +1,4 @@
-FROM alpine:latest
+FROM python:3-alpine
 
 RUN apk update \ 
   && apk add --no-cache \
@@ -7,12 +7,17 @@ RUN apk update \
   make \
   sqlite
 
-RUN git clone https://github.com/jncraton/rebrickable-sqlite.git /rebrickable-sqlite
-RUN apk del git && rm -R /rebrickable-sqlite/.git
+RUN git clone https://github.com/jncraton/rebrickable-sqlite.git /bricks/rebrickable
+RUN apk del git && rm -R /bricks/rebrickable/.git
 
-RUN adduser -H -D --shell=/sbin/nologin bricks
-RUN chown -R bricks:bricks /rebrickable-sqlite
+WORKDIR /bricks/setlists
 
-USER bricks
+COPY requirements.txt setlists.py ./
+RUN pip install --no-cache-dir -r requirements.txt
 
-CMD [ "make", "-C", "/rebrickable-sqlite" ]
+COPY ./entrypoint.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
+
+VOLUME [ "/database" ]
+
+CMD ["/entrypoint.sh"]
