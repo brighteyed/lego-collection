@@ -17,7 +17,7 @@ docker container run --rm --name lego-collection \
     --env PASSWORD=<rebrickable password> \
     --env API_KEY=<rebrickable API key> \
     --volume=/path/to/database/dir:/database \
-    lego-collection:latest
+    bricks:latest
 ```
 
 ## Docker compose
