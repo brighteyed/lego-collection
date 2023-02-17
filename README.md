@@ -22,7 +22,8 @@ docker container run --rm --name lego-collection \
 
 ## Docker compose
 
-- Change variables' values in `sample.env`
+- Save `sample.env` file as `.env` file
+- Change variables' values in `.env` file
 - Run compose tool:
 ```
 docker compose up

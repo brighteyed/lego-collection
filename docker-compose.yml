@@ -7,4 +7,4 @@ services:
     volumes:
       - "${DOCKER_DATA}/bricks:/database"
     env_file:
-      - sample.env
+      - .env
