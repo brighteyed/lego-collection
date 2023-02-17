@@ -1,1 +1,6 @@
 venv/
+
+# Exclude all environment files
+# but not the sample file
+*.env
+!sample.env
