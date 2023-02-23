@@ -1,5 +1,8 @@
 venv/
 
+# MacOS System Files
+.DS_Store
+
 # Exclude all environment files
 # but not the sample file
 *.env
