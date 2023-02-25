@@ -49,7 +49,7 @@ if __name__ == "__main__":
                                 headers={"Authorization": f"key {API_KEY}"},
                                 params={"page": 1, "page_size": 1000})
                 if sets_req.status_code != 200:
-                    print(f"Unable to acquire sets for list {list_id}, code={r2.status_code}")
+                    print(f"Unable to acquire sets for list {list_id}, code={sets_req.status_code}")
                     exit(1)
 
                 sets_resp = sets_req.json()
