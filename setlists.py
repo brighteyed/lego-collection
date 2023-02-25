@@ -45,19 +45,19 @@ if __name__ == "__main__":
 
             for i in range(resp["count"]):
                 list_id = resp["results"][i]["id"]
-                r2 = requests.get(f"https://rebrickable.com/api/v3/users/{user_token}/setlists/{list_id}/sets",
+                sets_req = requests.get(f"https://rebrickable.com/api/v3/users/{user_token}/setlists/{list_id}/sets",
                                 headers={"Authorization": f"key {API_KEY}"},
                                 params={"page": 1, "page_size": 1000})
-                if r2.status_code != 200:
-                    print(f"Unable to acquire sets for list {list_id}, code={r2.status_code}")
+                if sets_req.status_code != 200:
+                    print(f"Unable to acquire sets for list {list_id}, code={sets_req.status_code}")
                     exit(1)
 
-                resp2 = r2.json()
-                if resp2["next"] != None:
+                sets_resp = sets_req.json()
+                if sets_resp["next"] != None:
                     print(f"Too many sets in {list_id}. No pagination implemented")
                     exit(1)
 
-                for set in resp2["results"]:
+                for set in sets_resp["results"]:
                     cur.execute('''
                         insert into set_lists values (?, ?, ?);
                     ''', (set["list_id"], set["set"]["set_num"], set["quantity"]))
