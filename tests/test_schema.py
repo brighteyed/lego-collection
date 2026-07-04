@@ -86,3 +86,22 @@ def test_set_lists_table(tmp_db):
     cur = tmp_db.execute("pragma table_info(set_lists)")
     cols = {row[1] for row in cur}
     assert cols == {"setlist", "set_num", "quantity"}
+
+
+def test_create_schema_twice(tmp_db):
+    importer.create_schema(tmp_db)
+    importer.create_schema(tmp_db)
+    cur = tmp_db.execute(
+        "select name from sqlite_master where type='table' order by name"
+    )
+    names = [row[0] for row in cur]
+    for t in TABLES:
+        assert t in names
+
+
+def test_create_schema_clears_data(tmp_db):
+    importer.create_schema(tmp_db)
+    tmp_db.execute("insert into themes (id, name) values (99, 'Old')")
+    importer.create_schema(tmp_db)
+    cur = tmp_db.execute("select count(*) from themes")
+    assert cur.fetchone()[0] == 0
