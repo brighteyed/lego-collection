@@ -1,3 +1,22 @@
+drop view if exists canonical_parts;
+drop view if exists part_nums;
+drop view if exists part_color_info;
+drop view if exists part_info;
+drop view if exists set_parts;
+
+drop table if exists inventory_minifigs;
+drop table if exists inventory_sets;
+drop table if exists inventory_parts;
+drop table if exists inventories;
+drop table if exists elements;
+drop table if exists sets;
+drop table if exists part_relationships;
+drop table if exists parts;
+drop table if exists part_categories;
+drop table if exists minifigs;
+drop table if exists colors;
+drop table if exists themes;
+
 create table if not exists themes (
   id smallint primary key,
   name varchar(64),
@@ -141,7 +160,6 @@ select child_part_num as part_num from part_relationships
 union
 select parent_part_num as part_num from part_relationships;
 
-drop view if exists canonical_parts;
 create view canonical_parts
 as
 with RECURSIVE part_tree(part_num, canonical_part_num) as (
