@@ -1,9 +1,10 @@
 venv/
-
-# MacOS System Files
+__pycache__/
+*.pyc
+*.db
+*.egg-info/
+dist/
+build/
 .DS_Store
-
-# Exclude all environment files
-# but not the sample file
 *.env
 !sample.env
