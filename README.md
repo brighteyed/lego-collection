@@ -85,13 +85,19 @@ sets|26285
 ...
 
 === NULL PRIMARY KEYS (should be empty) ===
-=== ORPHANED FOREIGN KEYS (should be empty) ===
+=== ORPHANED FOREIGN KEY COUNTS ===
+(small counts are expected — Rebrickable data has gaps for delisted sets)
+parts missing category|0
+sets missing theme|0
+inventories missing set|17031
+elements missing part|2
+elements missing color|0
 
 === YOUR SET LISTS ===
 mylist|10193-1|Medieval Market Village|1
 ```
 
-Everything passes when no rows appear under the NULL / orphaned sections.
+Small orphan counts are normal (delisted sets in Rebrickable data). Non-zero counts in the NULL checks would indicate a real problem.
 
 ## How it works
 
@@ -116,7 +122,7 @@ pytest -v
 ```
 
 The test suite covers:
-- **Schema** — all 11 tables, 5 views, and 5 indices are created correctly
+- **Schema** — all 11 tables, 5 views, and 5 indices are created correctly; schema can be rebuilt idempotently
 - **CSV import** — data round-trips correctly, extra CSV columns are ignored, relationship parts are expanded
 - **API client** — authentication, pagination, and set list fetching (with mocked HTTP)
 - **Config** — config file write/read, missing file error, missing keys

@@ -19,6 +19,7 @@ pytest tests/test_schema.py   # single file
 ```bash
 lego-collection auth          # store Rebrickable credentials
 lego-collection build --db bricks.db  # build database
+sqlite3 bricks.db < verify.sql  # verify DB integrity
 python -m lego_collection     # alternative entry point
 ```
 
@@ -33,8 +34,9 @@ src/lego_collection/   # package source
   importer.py          # schema creation, CSV import, indices
   api.py               # Rebrickable v3 API client (auth + set lists)
 schema/                # SQL files shipped as package data
-  schema.sql           # 11 tables + 5 views
+  schema.sql           # 11 tables + 5 views (DROP-before-CREATE)
   indices.sql          # 5 indices
+verify.sql             # standalone DB verification script
 tests/                 # pytest tests with mocked HTTP / in-memory SQLite
 ```
 
