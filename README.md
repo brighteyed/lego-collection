@@ -127,6 +127,11 @@ The test suite covers:
 - **API client** — authentication, pagination, and set list fetching (with mocked HTTP)
 - **Config** — config file write/read, missing file error, missing keys
 
+## Acknowledgments
+
+- [Rebrickable](https://rebrickable.com) for providing the public LEGO database and API.
+- [jncraton/rebrickable-sqlite](https://github.com/jncraton/rebrickable-sqlite) for the SQL schema and query patterns that inspired the database layout.
+
 ## License
 
 MIT
