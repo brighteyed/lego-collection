@@ -33,7 +33,7 @@ def download_csvs(target_dir):
             data = gzip.decompress(resp.content)
             lines = data.decode("utf-8").splitlines()
             with open(dest, "w", encoding="utf-8") as f:
-                f.writelines(line + "\n" for line in lines[1:])
+                f.writelines(line + "\n" for line in lines)
             paths[table] = dest
         except requests.RequestException as e:
             raise RuntimeError(f"Failed to download {table}: {e}") from e
