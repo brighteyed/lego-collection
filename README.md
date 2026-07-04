@@ -67,6 +67,32 @@ SELECT * FROM set_lists;
 
 See `examples.sql` in the upstream [rebrickable-sqlite](https://github.com/jncraton/rebrickable-sqlite) repository for more query examples.
 
+## Verify the database
+
+Run the included script to check row counts, detect null primary keys and orphaned foreign keys, and preview your set lists:
+
+```bash
+sqlite3 bricks.db < verify.sql
+```
+
+Sample output:
+
+```
+=== ROW COUNTS ===
+colors|275
+parts|108632
+sets|26285
+...
+
+=== NULL PRIMARY KEYS (should be empty) ===
+=== ORPHANED FOREIGN KEYS (should be empty) ===
+
+=== YOUR SET LISTS ===
+mylist|10193-1|Medieval Market Village|1
+```
+
+Everything passes when no rows appear under the NULL / orphaned sections.
+
 ## How it works
 
 1. **Downloads** 12 compressed CSV files from `cdn.rebrickable.com`
