@@ -18,7 +18,7 @@ def build(db_path):
         csv_paths = downloader.download_csvs(tmpdir)
 
         print("Building database...")
-        conn = sqlite3.connect(db_path)
+        conn = sqlite3.connect(db_path, isolation_level=None)
         conn.execute("pragma journal_mode = off")
         conn.execute("pragma synchronous = off")
         try:
