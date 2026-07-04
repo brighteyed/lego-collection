@@ -54,7 +54,7 @@ select sl.setlist, sl.set_num, s.name, sl.quantity
 .print (sets with 0 parts are incomplete data and excluded)
 select set_num, name, year, num_parts
   from sets
- where year = (select max(year) from sets)
+ where year = (select max(year) from sets where num_parts > 0)
    and num_parts > 0
  order by num_parts desc
  limit 10;
