@@ -3,7 +3,7 @@ import os
 import sqlite3
 
 
-SCHEMA_DIR = os.path.join(os.path.dirname(__file__), "..", "..", "schema")
+SCHEMA_DIR = os.path.join(os.path.dirname(__file__), "schema")
 
 
 def _schema_path(name):

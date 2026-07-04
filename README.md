@@ -16,7 +16,7 @@ Or with pip in a virtual environment:
 pip install .
 ```
 
-## Usage
+## Build the database
 
 ### 1. Store your Rebrickable credentials
 
@@ -43,7 +43,7 @@ The output is written to `bricks.db` in the current directory. Use `--db` to spe
 lego-collection build --db ~/lego/bricks.db
 ```
 
-### Query the database
+## Query the database
 
 Use any SQLite client:
 
@@ -75,6 +75,25 @@ See `examples.sql` in the upstream [rebrickable-sqlite](https://github.com/jncra
 4. **Creates** indices on commonly queried columns
 5. **Authenticates** against the Rebrickable API v3 and fetches your set lists
 6. **Appends** a `set_lists` table with your personal collection data
+
+## Testing
+
+```bash
+# Install with test dependencies
+pip install -e ".[test]"
+
+# Run tests
+pytest
+
+# Run with verbose output
+pytest -v
+```
+
+The test suite covers:
+- **Schema** — all 11 tables, 5 views, and 5 indices are created correctly
+- **CSV import** — data round-trips correctly, extra CSV columns are ignored, relationship parts are expanded
+- **API client** — authentication, pagination, and set list fetching (with mocked HTTP)
+- **Config** — config file write/read, missing file error, missing keys
 
 ## License
 
