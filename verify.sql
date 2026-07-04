@@ -21,22 +21,23 @@ union all select 'parts has null part_num' from parts where part_num is null
 union all select 'sets has null set_num' from sets where set_num is null
 union all select 'themes has null id' from themes where id is null;
 
-.print \n=== ORPHANED FOREIGN KEYS (should be empty) ===
-select 'parts missing category' from parts p
+.print \n=== ORPHANED FOREIGN KEY COUNTS ===
+.print (small counts are expected — Rebrickable data has gaps for delisted sets)
+select 'parts missing category', count(*) from parts p
  where p.part_cat_id is not null
    and p.part_cat_id not in (select id from part_categories)
 union all
-select 'sets missing theme' from sets s
+select 'sets missing theme', count(*) from sets s
  where s.theme_id is not null
    and s.theme_id not in (select id from themes)
 union all
-select 'inventories missing set' from inventories i
+select 'inventories missing set', count(*) from inventories i
  where i.set_num not in (select set_num from sets)
 union all
-select 'elements missing part' from elements e
+select 'elements missing part', count(*) from elements e
  where e.part_num not in (select part_num from parts)
 union all
-select 'elements missing color' from elements e
+select 'elements missing color', count(*) from elements e
  where e.color_id not in (select id from colors);
 
 .print \n=== SET RANGE ===

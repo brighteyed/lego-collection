@@ -103,7 +103,7 @@ create table if not exists inventory_minifigs (
   fig_num varchar(20),
   quantity smallint,
   foreign key(inventory_id) references inventories(id),
-  foreign key(fig_num) references minifigs(set_num)
+  foreign key(fig_num) references minifigs(fig_num)
 );
 
 create view if not exists set_parts
