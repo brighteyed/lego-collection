@@ -1,0 +1,10 @@
+services:
+  backup:
+    build: .
+    image: lego-collection:latest
+    environment:
+      REBRICKABLE_API_KEY: ${REBRICKABLE_API_KEY:-}
+      REBRICKABLE_USERNAME: ${REBRICKABLE_USERNAME:-}
+      REBRICKABLE_PASSWORD: ${REBRICKABLE_PASSWORD:-}
+    volumes:
+      - ${DATA_DIR:-./data}:/data

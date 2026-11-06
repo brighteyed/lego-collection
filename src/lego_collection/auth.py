@@ -15,6 +15,12 @@ CONFIG_PATH = os.path.join(CONFIG_DIR, "lego-collection", "config.ini")
 SECTION = "rebrickable"
 KEYS = ["api_key", "username", "password"]
 
+ENV_VARS = {
+    "api_key": "REBRICKABLE_API_KEY",
+    "username": "REBRICKABLE_USERNAME",
+    "password": "REBRICKABLE_PASSWORD",
+}
+
 
 def write_config(api_key, username, password):
     os.makedirs(os.path.dirname(CONFIG_PATH), exist_ok=True)
@@ -29,9 +35,17 @@ def write_config(api_key, username, password):
 
 
 def read_config():
+    env = {
+        key: os.environ.get(var, "").strip()
+        for key, var in ENV_VARS.items()
+    }
+    if all(env.values()):
+        return env
     if not os.path.exists(CONFIG_PATH):
         raise FileNotFoundError(
-            f"No credentials found at {CONFIG_PATH}. Run 'lego-collection auth' first."
+            "No credentials found: set REBRICKABLE_API_KEY, REBRICKABLE_USERNAME "
+            "and REBRICKABLE_PASSWORD (see .env.example), or run "
+            f"'lego-collection auth' to create {CONFIG_PATH}."
         )
     config = configparser.ConfigParser()
     config.read(CONFIG_PATH)
