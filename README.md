@@ -108,6 +108,26 @@ Small orphan counts are normal (delisted sets in Rebrickable data). Non-zero cou
 5. **Authenticates** against the Rebrickable API v3 and fetches your set lists
 6. **Appends** a `set_lists` table with your personal collection data
 
+## Use with Docker
+
+No Python installation needed — Docker Desktop or OrbStack does the work.
+
+### 1. Configure
+
+```bash
+cp .env.example .env
+```
+
+Fill in your Rebrickable API key, username, and password in `.env`. Optionally change `DATA_DIR` (working directory for the database; default `./data`).
+
+### 2. Run
+
+```bash
+make
+```
+
+`make` starts Docker (Docker Desktop or OrbStack) if it isn't running, builds the image if required, then runs the full build: it downloads the latest Rebrickable CSV dumps and updates the database in your data directory.
+
 ## Testing
 
 ```bash
